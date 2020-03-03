@@ -36,7 +36,7 @@ export class AppModule implements DoBootstrap {
     const { keycloak } = environment;
 
     await keycloakService
-      .init({ config: keycloak })
+      .init({ config: keycloak, })
       .then(() => {
         console.log('[ngDoBootstrap] bootstrap app');
 

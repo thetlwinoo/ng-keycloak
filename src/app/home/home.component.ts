@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(private addressTypesService: AddressTypesService) { }
 
   ngOnInit(): void {
-    this.loadAll();
+    // this.loadAll();
   }
 
   loadAll(): void {

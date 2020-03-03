@@ -25,16 +25,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
         try {
             const token = await this.authService.getValidToken();
-            console.log('token', token)
             if (!!token) {
                 request = request.clone({
                     setHeaders: {
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${token}`,
                     }
                 });
             }
         } catch (err) {
             // ignore
+            console.log('error', err)
         }
         return next.handle(request).toPromise();
     }

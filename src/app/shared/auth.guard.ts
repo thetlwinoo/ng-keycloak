@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { KeycloakService, KeycloakAuthGuard } from 'keycloak-angular';
+import { KeycloakLoginOptions } from 'keycloak-js';
 
 @Injectable()
 export class AppAuthGuard extends KeycloakAuthGuard {
@@ -11,7 +12,11 @@ export class AppAuthGuard extends KeycloakAuthGuard {
     isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         return new Promise(async (resolve, reject) => {
             if (!this.authenticated) {
-                this.keycloakAngular.login();
+                const scopes = 'openid profile offline_access';
+                const options: KeycloakLoginOptions = {
+                    scope: scopes,
+                };
+                this.keycloakAngular.login(options);
                 return;
             }
 
